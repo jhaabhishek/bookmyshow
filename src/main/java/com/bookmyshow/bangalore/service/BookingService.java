@@ -41,6 +41,9 @@ public class BookingService implements IBookingService {
         
 		    }
 
+	/**
+	 * This  function is used to fetch the movie by ID
+	 */
 	@Override
 	public MovieDto getMovieById(Long id) {
 		// TODO Auto-generated method stub
