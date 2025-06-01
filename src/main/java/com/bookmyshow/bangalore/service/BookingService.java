@@ -18,6 +18,10 @@ public class BookingService implements IBookingService {
 	@Autowired
 	MovieRepository movieRepository;
 	
+	/**
+	 *This method is use to save the movie details in database 
+	 *API is  exposed publically as of now
+	 */
 	@Override
 	public String addMovie(MovieDto movieDto) {
 		
