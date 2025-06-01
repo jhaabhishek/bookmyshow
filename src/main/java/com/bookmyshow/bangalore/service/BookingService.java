@@ -37,7 +37,7 @@ public class BookingService implements IBookingService {
 		 
 		movieRepository.save(moveEntity);
 		
-        return "Movie added successfully";
+        return "Movie details added successfully";
         
 		    }
 
