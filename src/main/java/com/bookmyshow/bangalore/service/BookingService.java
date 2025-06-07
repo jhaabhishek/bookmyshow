@@ -3,21 +3,26 @@ package com.bookmyshow.bangalore.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.bookmyshow.bangalore.controller.AdminController;
 import com.bookmyshow.bangalore.entity.Movies;
 import com.bookmyshow.bangalore.model.MovieDto;
 import com.bookmyshow.bangalore.repository.MovieRepository;
 
 @Service
 public class BookingService implements IBookingService {
+	
+
 
 	@Autowired
 	MovieRepository movieRepository;
-	
+	Logger logger = Logger.getLogger(BookingService.class.getName());
 	/**
 	 *This method is use to save the movie details in database 
 	 *API is  exposed publically as of now
@@ -64,7 +69,9 @@ public class BookingService implements IBookingService {
 	}
 
 	@Override
+	 @Cacheable(cacheNames = "retriveMovies", value = "retriveMovies")
 	public List<MovieDto> getMovies() {
+		logger.info("from db ");
 		// TODO Auto-generated method stub
 		List<Movies> movies  =movieRepository.findAll();
 		//List<MovieDto> movieDtos = new ArrayList<MovieDto>();

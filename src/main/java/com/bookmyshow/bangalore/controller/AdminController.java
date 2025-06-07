@@ -1,11 +1,9 @@
 package com.bookmyshow.bangalore.controller;
-
-
+import java.util.logging.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +16,7 @@ import com.bookmyshow.bangalore.service.BookingService;
 @RequestMapping("/api/admin")
 public class AdminController {
 	  // Example: Add a new movie
+	Logger logger = Logger.getLogger(AdminController.class.getName());
      @Autowired
 	 private BookingService bookingService;
 	 
@@ -34,7 +33,12 @@ public class AdminController {
     }
      
      @GetMapping("/movies")
+    // @Cacheable(cacheNames = "retriveMovies", value = "retriveMovies")
      public ResponseEntity<List<MovieDto>> getAllMovies() {
+    	 
+    	 logger.info("loading from db movie tb");
+    	 
+    	 
          List<MovieDto> result = bookingService.getMovies();
         return new ResponseEntity<List<MovieDto>>(result, HttpStatus.OK);
     }
